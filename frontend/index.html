@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo App</title>
+</head>
+<body>
+
+<h2>Todo List</h2>
+<input id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+
+<script>
+  let todos = [];
+
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    if (input.value === "") return;
+
+    todos.push({ task: input.value });
+    render();
+    input.value = "";
+  }
+
+  function render() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+    todos.forEach((t, i) => {
+      list.innerHTML += `<li>${t.task}</li>`;
+    });
+  }
+</script>
+
+</body>
+</html>
