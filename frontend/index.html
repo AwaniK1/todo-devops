@@ -6,28 +6,48 @@
 <body>
 
 <h2>Todo List</h2>
+
 <input id="taskInput" placeholder="Enter task">
-<button onclick="addTask()">Add</button>
+<button onclick="handleAdd()">Add</button>
 
 <ul id="list"></ul>
+
+<!-- Load task manager logic -->
+<script src="todo.js"></script>
 
 <script>
   let todos = [];
 
-  function addTask() {
+  function handleAdd() {
     const input = document.getElementById("taskInput");
-    if (input.value === "") return;
-
-    todos.push({ task: input.value });
-    render();
+    todos = addTodo(todos, input.value);
     input.value = "";
+    render();
+  }
+
+  function handleDelete(index) {
+    todos = deleteTodo(todos, index);
+    render();
+  }
+
+  function handleEdit(index) {
+    const newTask = prompt("Edit task:");
+    todos = editTodo(todos, index, newTask);
+    render();
   }
 
   function render() {
     const list = document.getElementById("list");
     list.innerHTML = "";
-    todos.forEach((t, i) => {
-      list.innerHTML += `<li>${t.task}</li>`;
+
+    getTodos(todos).forEach((t, i) => {
+      list.innerHTML += `
+        <li>
+          ${t.task}
+          <button onclick="handleEdit(${i})">Edit</button>
+          <button onclick="handleDelete(${i})">Delete</button>
+        </li>
+      `;
     });
   }
 </script>
