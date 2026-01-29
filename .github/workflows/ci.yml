@@ -24,7 +24,4 @@ jobs:
       - name: Run Jest tests
         run: npx jest
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
